@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food suggestion according to temperature</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+
+    .food-items {
+      margin: 20px;
+      margin-top: 50px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-radius: 20px;
+      height: auto;
+      width: 90%;
+      background: #d4f9c3;
+    }
+
+    .food-items p {
+      margin: 10px;
+      width: 80%;
+      text-wrap: wrap;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      margin: 10px;
+      border-radius: 10px;
+      background: #b4d6f9;
+    }
+
+    .item h1 {
+      font-size: 1.5rem;
+      font-weight: bolder;
+    }
+
+    .food-items img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin: 10px;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+  <body>
+    <h1>Home Temperature</h1>
+    <form method="POST">
+      <label for="city">Enter City:</label>
+      <input type="text" name="city" id="city" />
+      <label for="state">Enter State:</label>
+      <input type="text" name="state" id="state" />
+      <label for="country">Enter Country:</label>
+      <input type="text" name="country" id="country" />
+      <label for="country">Enter weather manually(optional*):</label>
+      <input type="text" name="weather" id="weather" placeholder="Optoinal"/>
+      <button type="submit">Suggest Food Items</button>
+    </form>
+    {% if temperature %}
+    <p>The temperature in {{ city }} is {{ temperature }}°C.</p>
+    {% elif error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <div class="food-items">
+      {% for item in food %}
+      <div class="item">
+        <!-- <img src="{{ item['image'] }}" alt="{{ item['name'] }}" /> -->
+        <h1>{{ item["name"] }}</h1>
+        <p> - {{ item["description"] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
