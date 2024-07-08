@@ -36,4 +36,3 @@ Weather-Wise Eats is a user-friendly Flask web application that empowers you to 
 **How it Works:**
 
 This app fights decision fatigue! It uses Flask to ask your food preferences and restrictions. Based on your answers, it recommends meals using smarty-pants algorithms (think matching preferences or ingredients). It can even connect to recipe databases for details (optional). Imagine - no more "what's for dinner?" woes!
-
