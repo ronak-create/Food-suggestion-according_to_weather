@@ -15,7 +15,7 @@ def get_lat_lon(city_name, state_code, country_code, API_KEY):
     lat, lon = data.get("lat"), data.get("lon")
     return lat, lon
 
-def get_temperature(lat,lon,API_KEY):
+def get_weather(lat,lon,API_KEY):
     resp = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric').json()
     print(resp)
     weather_data = {"main":resp.get('weather')[0].get('main'), "temp":int(resp.get('main').get('temp'))}
@@ -25,28 +25,15 @@ def get_temperature(lat,lon,API_KEY):
 @app.route("/", methods=["GET","POST"])
 def index():
     city_name = None
-    weather_manual = None
     food = None
     try:
         if request.method == "POST":
             city_name = request.form["city"]
             state_name = request.form["state"]
             country_name = request.form["country"]
-            weather_manual = request.form["weather"]
             lat,lon=get_lat_lon(city_name, state_name, country_name, API_KEY)
-            temp = get_temperature(lat,lon,API_KEY)
-            try:
-                food = food_suggestion(temp.get("main"),city_name)
-            except:
-                food = food_suggestion(weather_manual,city_name)
-            print(food)
-            # url = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric"
-            # response = requests.get(url)
-            # if response.status_code == 200:
-                # data = response.json()
-                # temperature = data["main"]["temp"]
-            # else:
-            #     error_message = "City not found!"
+            temp = get_weather(lat,lon,API_KEY)
+            food = food_suggestion(temp.get("main"),city_name)
 
         return render_template("index.html", city=city_name, food = food)
     except:
