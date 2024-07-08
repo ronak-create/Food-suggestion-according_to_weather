@@ -1,4 +1,4 @@
-!["Weather App Landing"](weather_app_landing.png)
+!["Weather and Location Based Food Recommendation App Landing Page"](Thumbnail.png)
 ## Weather-Wise Eats: Dining Delights Based on Weather and Location ☁️✨
 
 Weather-Wise Eats is a user-friendly Flask web application that empowers you to discover delectable meals that complement the current weather in your location and take into account your specific region. It seamlessly integrates with OpenWeatherMap's API to fetch real-time weather data (temperature, weather type) and leverages a custom food suggestion module (or a different approach, as applicable) to recommend suitable dishes.
